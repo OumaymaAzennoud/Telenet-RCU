@@ -1,31 +1,24 @@
 from Functions import *
+from Commands import *
+import serial
 
 
-Enable_TSU = b'\x02\x10\x05\x01\x54\x45\x53\x54\x03'
-Button_ChanUp= b'\x02\x20\x02\x00\x18\x03'
+#----------------------------------------
+#Variable
+#----------------------------------------
+PressDuration = 3
+ReleaseDuration = 1
+breakDuration=1
+buttonsList=[ChanDown,ChanUp,Home,Back,Digit1,Home,Back,Digit4]
+ShowResponse=True
+response=0
+#----------------------------------------
 
-send_packet(Enable_TSU)
-time.sleep(0.5)
-send_packet(Enable_TSU)
-time.sleep(0.5)
-send_packet(Enable_TSU)
-time.sleep(0.5)
-send_packet(Enable_TSU)
-time.sleep(0.5)
-send_packet(Enable_TSU)
-time.sleep(0.5)
-send_packet(Enable_TSU)
-time.sleep(0.5)
-send_packet(Enable_TSU)
-time.sleep(0.5)
-send_packet(Enable_TSU)
-time.sleep(0.5)
-send_packet(Enable_TSU)
-time.sleep(0.5)
-send_packet(Enable_TSU)
-time.sleep(0.5)
+check_connection()
+
+while response != b'\x02\x10\x06\x02\x01\x00\x03\x00\x07' :
+    response=EnableTSU(Enable_TSU, ShowResponse)
 
 while True:
-
-    send_packet(Button_ChanUp)
+    shortPressMultiple(buttonsList,ShowResponse, breakDuration)
 
