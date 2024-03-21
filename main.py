@@ -23,7 +23,11 @@ NTimes = 3
 checkConnection(uart_port)
 
 while response != TSU_Is_Enabled :
-    response=enableTSU(uart_port,Enable_TSU, ShowResponse)
+    try:
+        response=enableTSU(uart_port,Enable_TSU, ShowResponse)
+    except serial.SerialException as e:
+        print("Device disconnected")
+        time.sleep(1)
 
 while True:
     try:
@@ -42,5 +46,5 @@ while True:
         shortPressMultiple(uart_port,List,ShowResponse, 0)
         time.sleep(3)
     except serial.SerialException as e:
-        print("Device disconnected:", e)
+        print("Device disconnected")
         break
