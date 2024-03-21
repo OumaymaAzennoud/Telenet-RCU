@@ -93,6 +93,7 @@ def shortPressNTimes(uart_port,button,ShowResponse,NTimes,breakDuration):
     with serial.Serial(uart_port, baud_rate, timeout=1) as ser:
         N=0
         while N < NTimes :
+            print("iteration")
             ser.write(button)
             ser.write(R_button)
             time.sleep(breakDuration)

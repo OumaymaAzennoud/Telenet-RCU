@@ -25,10 +25,18 @@ checkConnection(uart_port)
 while response != TSU_Is_Enabled :
     response=enableTSU(uart_port,Enable_TSU, ShowResponse)
 
-#while True:
-#    shortPressMultiple(uart_port,buttonsList,ShowResponse, breakDuration)
-
-longPress(uart_port,ChanDown , PressDuration ,ShowResponse)
-
-
-
+while True:
+    print("Multiple keys short")
+    shortPressMultiple(uart_port,buttonsList,ShowResponse, 5)
+    time.sleep(3)
+    print("Long press 3 times")
+    longPressNTimes(uart_port,ChanUp,3,3,ShowResponse, 3)
+    time.sleep(3)
+    print("Short press 2 times")
+    shortPressNTimes(uart_port,Digit1,ShowResponse,2,0)
+    time.sleep(3)
+    shortPressNTimes(uart_port,Digit2,ShowResponse,2,0)
+    time.sleep(3)
+    List = [Digit1, Digit2,Digit3]
+    shortPressMultiple(uart_port,List,ShowResponse, 0)
+    time.sleep(3)
